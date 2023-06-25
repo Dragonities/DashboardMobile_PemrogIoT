@@ -1,112 +1,144 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/gradient"
     tools:context=".MainActivity">
 
-    <TextView
-        android:id="@+id/TempTextView"
-        android:layout_width="390dp"
-        android:layout_height="24dp"
-        android:text="Temperature Graph"
-        android:textSize="16sp"
-        app:layout_constraintBottom_toTopOf="@+id/TemperatureChart"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.238"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/ldrTextView"
-        android:layout_width="395dp"
-        android:layout_height="28dp"
-        android:textSize="16sp"
-        app:layout_constraintBottom_toTopOf="@+id/HumidityChart"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.574" />
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="16dp">
 
-    <TextView
-        android:id="@+id/HumTextView"
-        android:layout_width="390dp"
-        android:layout_height="24dp"
-        android:text="Humidity Graph"
-        android:textSize="16sp"
-        app:layout_constraintBottom_toTopOf="@+id/TemperatureChart"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.238"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.24" />
+            <ImageView
+                android:id="@+id/carImageView"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_alignParentStart="true"
+                android:layout_marginStart="12dp"
+                android:src="@drawable/car_image" />
 
-    <Button
-        android:id="@+id/btnNyala"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:onClick="publishNyala"
-        android:text="Palang ditutup"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.981"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.093" />
+            <TextView
+                android:id="@+id/dashboardTitleTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="0dp"
+                android:layout_toEndOf="@id/carImageView"
+                android:text="Dashboard Monitoring Parkir"
+                android:textColor="#FFFFFF"
+                android:textSize="24sp"
+                android:textStyle="bold" />
 
-    <Button
-        android:id="@+id/btnMati"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:onClick="publishMati"
-        android:text="Palang dibuka"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.981"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.023" />
+        </RelativeLayout>
 
-    <TextView
-        android:id="@+id/slotTextView"
-        android:layout_width="390dp"
-        android:layout_height="24dp"
-        android:textSize="16sp"
-        app:layout_constraintBottom_toTopOf="@+id/TemperatureChart"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.238"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.039" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center">
 
-    <com.github.mikephil.charting.charts.LineChart
+            <Button
+                android:id="@+id/btnMati"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                android:onClick="publishMati"
+                android:text="Masuk" />
 
-        android:id="@+id/HumidityChart"
-        android:layout_width="400dp"
-        android:layout_height="300dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.454"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.259"
-        tools:ignore="MissingConstraints">
+            <Button
+                android:id="@+id/btnNyala"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                android:onClick="publishNyala"
+                android:text="Keluar" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/ldrImageView"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_margin="16dp"
+                android:layout_gravity="center_horizontal" />
+
+            <TextView
+                android:id="@+id/ldrTextView"
+                android:layout_width="389dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:textColor="#000000"
+                android:textSize="16sp" />
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/slotTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:textSize="16sp"
+            android:padding="16dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/TempTextView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Temperature Graph"
+                android:textSize="16sp"
+                android:padding="16dp" />
 
 
-    </com.github.mikephil.charting.charts.LineChart>
+        </LinearLayout>
 
-    <com.github.mikephil.charting.charts.LineChart
-        android:id="@+id/TemperatureChart"
-        android:layout_width="400dp"
-        android:layout_height="300dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.454"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0"
-        tools:ignore="MissingConstraints" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <com.github.mikephil.charting.charts.LineChart
+            android:id="@+id/TemperatureChart"
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            android:padding="16dp" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/HumTextView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Humidity Graph"
+                android:textSize="16sp"
+                android:padding="16dp" />
+
+
+        </LinearLayout>
+        <com.github.mikephil.charting.charts.LineChart
+            android:id="@+id/HumidityChart"
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            android:padding="16dp" />
+
+
+
+
+    </LinearLayout>
+</ScrollView>

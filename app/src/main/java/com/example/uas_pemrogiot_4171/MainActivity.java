@@ -6,6 +6,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -29,7 +30,7 @@ public class MainActivity extends AppCompatActivity implements MqttCallback {
 
     MqttClient client = null;
     private static final String MQTT_MESSAGE_NYALA = "nyala";
-
+    ImageView ldrimageview;
 
     LineChart HumidityChart;
     LineChart Temperaturechart;
@@ -45,6 +46,8 @@ public class MainActivity extends AppCompatActivity implements MqttCallback {
         connectToMQTTBroker();
 
         Log.d("MQTT", "subscribed");
+
+        ldrimageview = findViewById(R.id.ldrImageView);
 
         HumidityChart = findViewById(R.id.HumidityChart);
         Temperaturechart = findViewById(R.id.TemperatureChart);
@@ -112,11 +115,13 @@ public class MainActivity extends AppCompatActivity implements MqttCallback {
             // ...
             float ldrValue = value;
             Log.d("MQTT", "ldrValue: " + ldrValue);
-            if (ldrValue < 40) {
-                Log.d("MQTT", "Inside ldrValue < 40 condition");
+            if (ldrValue < 50) {
+                Log.d("MQTT", "Inside ldrValue < 50 condition");
+                ldrimageview.setImageResource(R.drawable.lamp_on);
                 ldrTextView.setText("Ruangan Gelap Lampu akan Menyala" );
             } else {
-                Log.d("MQTT", "Inside ldrValue >= 40 condition");
+                Log.d("MQTT", "Inside ldrValue >= 50 condition");
+                ldrimageview.setImageResource(R.drawable.lamp_off);
                 ldrTextView.setText("Ruangan Terang Lampu mati");
             }
             ldrTextView.setVisibility(View.VISIBLE); // Set the visibility explicitly
@@ -133,7 +138,7 @@ public class MainActivity extends AppCompatActivity implements MqttCallback {
         } else if (topic.equals("4171/random")){
             int randomValue = (int) value; // Konversi float ke int
 
-            slotTextView.setText("Available Parking Slots: " + randomValue);
+            slotTextView.setText("Jumlah Pengunjung: " + randomValue);
         }
     }
 
@@ -231,7 +236,7 @@ public class MainActivity extends AppCompatActivity implements MqttCallback {
                 MqttMessage message = new MqttMessage();
                 message.setPayload(MQTT_MESSAGE_NYALA.getBytes());
                 client.publish("4171/relay", message);
-                Toast.makeText(this, "Palang ditutup", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Pengunjung Keluar", Toast.LENGTH_SHORT).show();
             } catch (MqttException e) {
                 e.printStackTrace();
             }
@@ -243,7 +248,7 @@ public class MainActivity extends AppCompatActivity implements MqttCallback {
                 MqttMessage message = new MqttMessage();
                 message.setPayload("mati".getBytes());
                 client.publish("4171/relay", message);
-                Toast.makeText(this, "Palang dibuka", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Pengunjung Masuk", Toast.LENGTH_SHORT).show();
             } catch (MqttException e) {
                 e.printStackTrace();
             }
